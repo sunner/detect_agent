@@ -1528,69 +1528,89 @@
     "expectedName": "custom-priority"
   },
   {
-    "name": "detects Doubao Office from its exact agent-name marker",
+    "name": "detects Doubao Office from a non-empty agent-name variable",
     "env": {
-      "DOUBAO_OFFICE_AGENT_NAME": "doubao_moa"
+      "DOUBAO_OFFICE_AGENT_NAME": "synthetic-agent"
     },
     "expectedIsAgent": true,
     "expectedAgentKey": "DOUBAO_OFFICE",
     "expectedName": "doubao-office"
   },
   {
-    "name": "DOUBAO_OFFICE_AGENT_NAME='' does not identify Doubao Office",
+    "name": "missing DOUBAO_OFFICE_AGENT_NAME does not identify Doubao Office",
+    "env": {},
+    "expectedIsAgent": false
+  },
+  {
+    "name": "empty DOUBAO_OFFICE_AGENT_NAME does not identify Doubao Office",
     "env": {
       "DOUBAO_OFFICE_AGENT_NAME": ""
     },
     "expectedIsAgent": false
   },
   {
-    "name": "DOUBAO_OFFICE_AGENT_NAME='other-agent' does not identify Doubao Office",
+    "name": "whitespace-only DOUBAO_OFFICE_AGENT_NAME follows non-empty semantics",
+    "env": {
+      "DOUBAO_OFFICE_AGENT_NAME": " \t "
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "DOUBAO_OFFICE"
+  },
+  {
+    "name": "DOUBAO_OFFICE_AGENT_NAME='other-agent' identifies Doubao Office",
     "env": {
       "DOUBAO_OFFICE_AGENT_NAME": "other-agent"
     },
-    "expectedIsAgent": false
+    "expectedIsAgent": true,
+    "expectedAgentKey": "DOUBAO_OFFICE"
   },
   {
-    "name": "DOUBAO_OFFICE_AGENT_NAME='doubao-office' does not identify Doubao Office",
+    "name": "DOUBAO_OFFICE_AGENT_NAME='doubao-office' identifies Doubao Office",
     "env": {
       "DOUBAO_OFFICE_AGENT_NAME": "doubao-office"
     },
-    "expectedIsAgent": false
+    "expectedIsAgent": true,
+    "expectedAgentKey": "DOUBAO_OFFICE"
   },
   {
-    "name": "DOUBAO_OFFICE_AGENT_NAME='DOUBAO_MOA' does not identify Doubao Office",
+    "name": "DOUBAO_OFFICE_AGENT_NAME='SYNTHETIC_AGENT' identifies Doubao Office",
     "env": {
-      "DOUBAO_OFFICE_AGENT_NAME": "DOUBAO_MOA"
+      "DOUBAO_OFFICE_AGENT_NAME": "SYNTHETIC_AGENT"
     },
-    "expectedIsAgent": false
+    "expectedIsAgent": true,
+    "expectedAgentKey": "DOUBAO_OFFICE"
   },
   {
-    "name": "DOUBAO_OFFICE_AGENT_NAME='Doubao_Moa' does not identify Doubao Office",
+    "name": "DOUBAO_OFFICE_AGENT_NAME='Synthetic_Agent' identifies Doubao Office",
     "env": {
-      "DOUBAO_OFFICE_AGENT_NAME": "Doubao_Moa"
+      "DOUBAO_OFFICE_AGENT_NAME": "Synthetic_Agent"
     },
-    "expectedIsAgent": false
+    "expectedIsAgent": true,
+    "expectedAgentKey": "DOUBAO_OFFICE"
   },
   {
-    "name": "DOUBAO_OFFICE_AGENT_NAME=' doubao_moa' does not identify Doubao Office",
+    "name": "DOUBAO_OFFICE_AGENT_NAME=' synthetic-agent' identifies Doubao Office",
     "env": {
-      "DOUBAO_OFFICE_AGENT_NAME": " doubao_moa"
+      "DOUBAO_OFFICE_AGENT_NAME": " synthetic-agent"
     },
-    "expectedIsAgent": false
+    "expectedIsAgent": true,
+    "expectedAgentKey": "DOUBAO_OFFICE"
   },
   {
-    "name": "DOUBAO_OFFICE_AGENT_NAME='doubao_moa ' does not identify Doubao Office",
+    "name": "DOUBAO_OFFICE_AGENT_NAME='synthetic-agent ' identifies Doubao Office",
     "env": {
-      "DOUBAO_OFFICE_AGENT_NAME": "doubao_moa "
+      "DOUBAO_OFFICE_AGENT_NAME": "synthetic-agent "
     },
-    "expectedIsAgent": false
+    "expectedIsAgent": true,
+    "expectedAgentKey": "DOUBAO_OFFICE"
   },
   {
-    "name": "DOUBAO_OFFICE_AGENT_NAME='doubao_moa\\n' does not identify Doubao Office",
+    "name": "DOUBAO_OFFICE_AGENT_NAME='synthetic-agent\\n' identifies Doubao Office",
     "env": {
-      "DOUBAO_OFFICE_AGENT_NAME": "doubao_moa\n"
+      "DOUBAO_OFFICE_AGENT_NAME": "synthetic-agent\n"
     },
-    "expectedIsAgent": false
+    "expectedIsAgent": true,
+    "expectedAgentKey": "DOUBAO_OFFICE"
   },
   {
     "name": "DOUBAO_OFFICE_ANSWER_MESSAGE_ID alone does not identify Doubao Office",
@@ -1696,7 +1716,7 @@
     "expectedIsAgent": false
   },
   {
-    "name": "Doubao Office metadata does not override a wrong agent-name marker",
+    "name": "Doubao Office accepts another non-empty agent name with metadata",
     "env": {
       "DOUBAO_OFFICE_ANSWER_MESSAGE_ID": "synthetic-message",
       "DOUBAO_OFFICE_APP_ID": "synthetic-app",
@@ -1710,10 +1730,11 @@
       "DOUBAO_OFFICE_MARKET": "synthetic-market",
       "DOUBAO_OFFICE_AGENT_NAME": "other-agent"
     },
-    "expectedIsAgent": false
+    "expectedIsAgent": true,
+    "expectedAgentKey": "DOUBAO_OFFICE"
   },
   {
-    "name": "the exact Doubao Office marker is sufficient with other metadata",
+    "name": "a non-empty Doubao Office agent name is sufficient with other metadata",
     "env": {
       "DOUBAO_OFFICE_ANSWER_MESSAGE_ID": "synthetic-message",
       "DOUBAO_OFFICE_APP_ID": "synthetic-app",
@@ -1725,7 +1746,7 @@
       "DOUBAO_OFFICE_FORWARD_PROXY": "https://proxy.example.invalid",
       "DOUBAO_OFFICE_LOG_ID": "synthetic-log",
       "DOUBAO_OFFICE_MARKET": "synthetic-market",
-      "DOUBAO_OFFICE_AGENT_NAME": "doubao_moa"
+      "DOUBAO_OFFICE_AGENT_NAME": "synthetic-agent"
     },
     "expectedIsAgent": true,
     "expectedAgentKey": "DOUBAO_OFFICE"
@@ -1733,7 +1754,7 @@
   {
     "name": "Doubao Office precedes inherited Cursor and Claude context",
     "env": {
-      "DOUBAO_OFFICE_AGENT_NAME": "doubao_moa",
+      "DOUBAO_OFFICE_AGENT_NAME": "synthetic-agent",
       "CURSOR_AGENT": "1",
       "CURSOR_TRACE_ID": "synthetic-trace",
       "CLAUDECODE": "1"
@@ -1742,18 +1763,18 @@
     "expectedAgentKey": "DOUBAO_OFFICE"
   },
   {
-    "name": "wrong Doubao Office name does not override Cursor context",
+    "name": "another non-empty Doubao Office name precedes Cursor context",
     "env": {
       "DOUBAO_OFFICE_AGENT_NAME": "other-agent",
       "CURSOR_AGENT": "1"
     },
     "expectedIsAgent": true,
-    "expectedAgentKey": "CURSOR_CLI"
+    "expectedAgentKey": "DOUBAO_OFFICE"
   },
   {
-    "name": "AI_AGENT overrides the exact Doubao Office marker",
+    "name": "AI_AGENT overrides the non-empty Doubao Office agent-name variable",
     "env": {
-      "DOUBAO_OFFICE_AGENT_NAME": "doubao_moa",
+      "DOUBAO_OFFICE_AGENT_NAME": "synthetic-agent",
       "AI_AGENT": "custom-priority"
     },
     "expectedIsAgent": true,

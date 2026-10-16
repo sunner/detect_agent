@@ -106,9 +106,11 @@ or `MANUS_ADDON_RUNTIME_SPECS_REVISION`. These descriptor names were reported in
 an ordinary shell; their values were not supplied. The Grok Bot cloud-shell
 combination also comes from a user observation. Shared infrastructure markers
 do not establish exclusive product ownership or the immediate caller.
-Doubao Office uses only the exact `DOUBAO_OFFICE_AGENT_NAME=doubao_moa` marker
-from a user-provided runtime observation. Other message, application, proxy,
-credential and deployment fields do not independently identify it.
+Doubao Office checks whether `DOUBAO_OFFICE_AGENT_NAME` has a non-empty value,
+using the existing `env_set` semantics. Its value is not compared to a fixed
+agent name; missing and empty values do not match. This variable comes from a
+user-provided runtime observation. Other message, application, proxy, credential
+and deployment fields do not independently identify it.
 
 New agent-specific markers precede inherited Cursor terminal context. The relative
 order and identifiers of existing rules are preserved, as are the `AI_AGENT` override

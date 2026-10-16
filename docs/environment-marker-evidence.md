@@ -125,12 +125,14 @@ Tests use synthetic descriptor values; no real spec path or revision is recorded
 
 ## Doubao Office
 
-A user-provided runtime observation on **2026-10-16** identified Doubao Office
-with `DOUBAO_OFFICE_AGENT_NAME=doubao_moa`. The rule accepts only that exact
-value and returns `doubao-office`. Empty values, other names, case changes and
-surrounding whitespace do not match. This observation was not independently
-reproduced by launching Doubao Office for this contribution; no local artifact
-version, hash or official stability guarantee is claimed.
+A user-provided runtime observation on **2026-10-16** identified
+`DOUBAO_OFFICE_AGENT_NAME` as the Doubao Office context marker. The rule uses
+this variable's non-emptiness and returns `doubao-office`; it does not compare
+the value to a particular agent name. The existing `env_set` behavior treats
+missing and empty values as absent and any non-empty value, including whitespace,
+as present. This observation was not independently reproduced by launching
+Doubao Office for this contribution; no local artifact version, hash or official
+stability guarantee is claimed.
 
 Other `DOUBAO_OFFICE_` message, application, citation, proxy, credential, edition,
 log and market fields are not detection conditions, separately or together.
