@@ -51,8 +51,36 @@ This package can detect the following AI agents and development environments:
 - **GitHub Copilot**
 - **Replit**
 - **Custom agents** (via the `AI_AGENT` environment variable)
+- **Crush** (Charm)
+- **Hermes Agent** (Nous Research)
+- **Kilo Code**
+- **Trae**
+- **VTCode**
+- **Zed terminal environment**
 
-See [`agents.json`](https://raw.githubusercontent.com/vercel/detect-agent/main/agents.json) for the exact environment variables and conditions used to detect each one.
+See the bundled [`agents.json`](detect_agent/agents.json) for the exact environment variables and conditions used to detect each one.
+
+### Environment context and rule sources
+
+These rules identify environment contexts; a match does not authenticate the process that
+started a command. In particular, `ZED_TERM` identifies a Zed terminal, including a
+human-operated terminal, so it is a fallback after other supported contexts.
+
+Crush (`CRUSH`), Hermes (`HERMES_SESSION_ID`), Kilo Code (`KILOCODE_FEATURE`),
+Trae (`TRAE_AI_SHELL_ID`), VTCode (`VTCODE=1`), and Zed (`ZED_TERM`) markers are
+also registered in the [Hugging Face agent-harness registry at commit
+`e082407`](https://github.com/huggingface/huggingface.js/blob/e08240742cd64d8f908b22e52358b84c812e882c/packages/tasks/src/agent-harnesses.ts).
+The same registry provides `GOOSE_TERMINAL` and `AGENT_CONTEXT_OUT`, which extend
+the existing Goose and Kiro rules without removing their previous conditions.
+Hermes additionally [advertises
+`HERMES_AGENT`](https://github.com/NousResearch/hermes-agent/blob/e5eb6b36fe78eb012cefd1f5f436cd458411b8b3/hermes_cli/main.py#L3268).
+VTCode requires the exact value `1`; the other added markers require a non-empty value.
+
+New agent-specific markers precede inherited Cursor terminal context. The relative
+order and identifiers of existing rules are preserved, as are the `AI_AGENT` override
+and the Python port's `PI_CODING_AGENT` compatibility check.
+Harnesses such as `hi` and `sandbase-harness` can already identify themselves with
+`AI_AGENT`; they do not need dedicated variable rules.
 
 ## The AI_AGENT Standard
 

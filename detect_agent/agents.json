@@ -5,6 +5,54 @@
   "aiAgentVar": "AI_AGENT",
   "agents": [
     {
+      "key": "CRUSH",
+      "name": "crush",
+      "description": "Crush execution context. Checked before inherited editor-terminal markers.",
+      "match": {
+        "type": "anyOf",
+        "conditions": [{ "type": "env_set", "name": "CRUSH" }]
+      }
+    },
+    {
+      "key": "HERMES",
+      "name": "hermes-agent",
+      "description": "Hermes execution context, identified by its session or harness marker.",
+      "match": {
+        "type": "anyOf",
+        "conditions": [
+          { "type": "env_set", "name": "HERMES_SESSION_ID" },
+          { "type": "env_set", "name": "HERMES_AGENT" }
+        ]
+      }
+    },
+    {
+      "key": "KILO_CODE",
+      "name": "kilo-code",
+      "description": "Kilo Code execution context.",
+      "match": {
+        "type": "anyOf",
+        "conditions": [{ "type": "env_set", "name": "KILOCODE_FEATURE" }]
+      }
+    },
+    {
+      "key": "TRAE",
+      "name": "trae",
+      "description": "Trae AI shell context.",
+      "match": {
+        "type": "anyOf",
+        "conditions": [{ "type": "env_set", "name": "TRAE_AI_SHELL_ID" }]
+      }
+    },
+    {
+      "key": "VTCODE",
+      "name": "vtcode",
+      "description": "VTCode execution context. Requires the documented marker value, not just a non-empty variable.",
+      "match": {
+        "type": "anyOf",
+        "conditions": [{ "type": "env_value", "name": "VTCODE", "value": "1" }]
+      }
+    },
+    {
       "key": "CURSOR",
       "name": "cursor",
       "match": {
@@ -112,7 +160,10 @@
       "name": "goose",
       "match": {
         "type": "anyOf",
-        "conditions": [{ "type": "env_set", "name": "GOOSE_PROVIDER" }]
+        "conditions": [
+          { "type": "env_set", "name": "GOOSE_PROVIDER" },
+          { "type": "env_set", "name": "GOOSE_TERMINAL" }
+        ]
       }
     },
     {
@@ -193,12 +244,18 @@
     {
       "key": "KIRO",
       "name": "kiro",
-      "description": "AWS Kiro. TERM_PROGRAM=kiro is set by both the IDE terminal and the CLI agent, so gate on no_tty to avoid misdetecting a human at the integrated terminal.",
+      "description": "AWS Kiro context from AGENT_CONTEXT_OUT, or the existing TERM_PROGRAM and no_tty heuristic. TERM_PROGRAM alone also occurs in human-operated IDE terminals.",
       "match": {
-        "type": "allOf",
+        "type": "anyOf",
         "conditions": [
-          { "type": "env_matches", "name": "TERM_PROGRAM", "pattern": "kiro" },
-          { "type": "no_tty" }
+          { "type": "env_set", "name": "AGENT_CONTEXT_OUT" },
+          {
+            "type": "allOf",
+            "conditions": [
+              { "type": "env_matches", "name": "TERM_PROGRAM", "pattern": "kiro" },
+              { "type": "no_tty" }
+            ]
+          }
         ]
       }
     },
@@ -216,6 +273,15 @@
       "match": {
         "type": "anyOf",
         "conditions": [{ "type": "file_exists", "path": "/opt/.devin" }]
+      }
+    },
+    {
+      "key": "ZED",
+      "name": "zed",
+      "description": "Zed terminal environment, not proof of an agent invocation. Kept as a fallback after other supported contexts.",
+      "match": {
+        "type": "anyOf",
+        "conditions": [{ "type": "env_set", "name": "ZED_TERM" }]
       }
     }
   ]

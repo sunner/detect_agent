@@ -297,5 +297,268 @@
     "env": { "AI_AGENT": "  custom-agent  " },
     "expectedIsAgent": true,
     "expectedName": "custom-agent"
+  },
+
+  {
+    "name": "detects crush context from CRUSH",
+    "env": {
+      "CRUSH": "1"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "CRUSH"
+  },
+  {
+    "name": "empty CRUSH does not detect a context",
+    "env": {
+      "CRUSH": ""
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "detects hermes context from HERMES_SESSION_ID",
+    "env": {
+      "HERMES_SESSION_ID": "session-test"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "HERMES"
+  },
+  {
+    "name": "empty HERMES_SESSION_ID does not detect a context",
+    "env": {
+      "HERMES_SESSION_ID": ""
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "detects hermes context from HERMES_AGENT",
+    "env": {
+      "HERMES_AGENT": "true"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "HERMES"
+  },
+  {
+    "name": "empty HERMES_AGENT does not detect a context",
+    "env": {
+      "HERMES_AGENT": ""
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "detects kilo_code context from KILOCODE_FEATURE",
+    "env": {
+      "KILOCODE_FEATURE": "shell"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "KILO_CODE"
+  },
+  {
+    "name": "empty KILOCODE_FEATURE does not detect a context",
+    "env": {
+      "KILOCODE_FEATURE": ""
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "detects trae context from TRAE_AI_SHELL_ID",
+    "env": {
+      "TRAE_AI_SHELL_ID": "shell-test"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "TRAE"
+  },
+  {
+    "name": "empty TRAE_AI_SHELL_ID does not detect a context",
+    "env": {
+      "TRAE_AI_SHELL_ID": ""
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "detects vtcode context from VTCODE",
+    "env": {
+      "VTCODE": "1"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "VTCODE"
+  },
+  {
+    "name": "empty VTCODE does not detect a context",
+    "env": {
+      "VTCODE": ""
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "detects zed context from ZED_TERM",
+    "env": {
+      "ZED_TERM": "1"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "ZED"
+  },
+  {
+    "name": "empty ZED_TERM does not detect a context",
+    "env": {
+      "ZED_TERM": ""
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "detects goose context from GOOSE_TERMINAL",
+    "env": {
+      "GOOSE_TERMINAL": "1"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "GOOSE"
+  },
+  {
+    "name": "empty GOOSE_TERMINAL does not detect a context",
+    "env": {
+      "GOOSE_TERMINAL": ""
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "detects kiro context from AGENT_CONTEXT_OUT",
+    "env": {
+      "AGENT_CONTEXT_OUT": "/tmp/kiro-context"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "KIRO"
+  },
+  {
+    "name": "empty AGENT_CONTEXT_OUT does not detect a context",
+    "env": {
+      "AGENT_CONTEXT_OUT": ""
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "VTCODE='0' does not match the exact marker",
+    "env": {
+      "VTCODE": "0"
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "VTCODE='true' does not match the exact marker",
+    "env": {
+      "VTCODE": "true"
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "VTCODE='01' does not match the exact marker",
+    "env": {
+      "VTCODE": "01"
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "VTCODE=' 1 ' does not match the exact marker",
+    "env": {
+      "VTCODE": " 1 "
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "CRUSH takes priority over inherited Cursor terminal context",
+    "env": {
+      "CRUSH": "1",
+      "CURSOR_TRACE_ID": "editor-trace"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "CRUSH"
+  },
+  {
+    "name": "HERMES_SESSION_ID takes priority over inherited Cursor terminal context",
+    "env": {
+      "HERMES_SESSION_ID": "session-test",
+      "CURSOR_TRACE_ID": "editor-trace"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "HERMES"
+  },
+  {
+    "name": "KILOCODE_FEATURE takes priority over inherited Cursor terminal context",
+    "env": {
+      "KILOCODE_FEATURE": "shell",
+      "CURSOR_TRACE_ID": "editor-trace"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "KILO_CODE"
+  },
+  {
+    "name": "TRAE_AI_SHELL_ID takes priority over inherited Cursor terminal context",
+    "env": {
+      "TRAE_AI_SHELL_ID": "shell-test",
+      "CURSOR_TRACE_ID": "editor-trace"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "TRAE"
+  },
+  {
+    "name": "VTCODE takes priority over inherited Cursor terminal context",
+    "env": {
+      "VTCODE": "1",
+      "CURSOR_TRACE_ID": "editor-trace"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "VTCODE"
+  },
+  {
+    "name": "Zed terminal context yields to Codex",
+    "env": {
+      "ZED_TERM": "1",
+      "CODEX_THREAD_ID": "thread-test"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "CODEX"
+  },
+  {
+    "name": "Zed terminal context yields to Devin",
+    "env": {
+      "ZED_TERM": "1"
+    },
+    "files": [
+      "/opt/.devin"
+    ],
+    "expectedIsAgent": true,
+    "expectedAgentKey": "DEVIN",
+    "skipGo": true
+  },
+  {
+    "name": "AI_AGENT takes priority over newly supported contexts",
+    "env": {
+      "AI_AGENT": "custom-priority",
+      "CRUSH": "1",
+      "HERMES_SESSION_ID": "session-test",
+      "HERMES_AGENT": "true",
+      "KILOCODE_FEATURE": "shell",
+      "TRAE_AI_SHELL_ID": "shell-test",
+      "VTCODE": "1",
+      "ZED_TERM": "1",
+      "GOOSE_TERMINAL": "1",
+      "AGENT_CONTEXT_OUT": "/tmp/kiro-context"
+    },
+    "expectedIsAgent": true,
+    "expectedName": "custom-priority"
+  },
+  {
+    "name": "accepts hi through AI_AGENT without a dedicated marker",
+    "env": {
+      "AI_AGENT": "hi"
+    },
+    "expectedIsAgent": true,
+    "expectedName": "hi"
+  },
+  {
+    "name": "accepts sandbase-harness through AI_AGENT without a dedicated marker",
+    "env": {
+      "AI_AGENT": "sandbase-harness"
+    },
+    "expectedIsAgent": true,
+    "expectedName": "sandbase-harness"
   }
 ]

@@ -33,6 +33,12 @@ JUNIE: Literal["junie"] = "junie"
 PI: Literal["pi"] = "pi"
 KIRO: Literal["kiro"] = "kiro"
 OPENCLAW: Literal["openclaw"] = "openclaw"
+CRUSH: Literal["crush"] = "crush"
+HERMES: Literal["hermes-agent"] = "hermes-agent"
+KILO_CODE: Literal["kilo-code"] = "kilo-code"
+TRAE: Literal["trae"] = "trae"
+VTCODE: Literal["vtcode"] = "vtcode"
+ZED: Literal["zed"] = "zed"
 
 KnownAgentNames = Literal[
     "cursor",
@@ -55,6 +61,12 @@ KnownAgentNames = Literal[
     "pi",
     "kiro",
     "openclaw",
+    "crush",
+    "hermes-agent",
+    "kilo-code",
+    "trae",
+    "vtcode",
+    "zed",
 ]
 
 
