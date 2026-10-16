@@ -53,6 +53,50 @@
       }
     },
     {
+      "key": "WORKBUDDY",
+      "name": "workbuddy",
+      "description": "WorkBuddy application context from its exact product-name markers. Generic packaging and configuration variables are insufficient.",
+      "match": {
+        "type": "anyOf",
+        "conditions": [
+          { "type": "env_value", "name": "WORKBUDDY_APPLICATION_NAME", "value": "WorkBuddy" },
+          { "type": "env_value", "name": "WORKBUDDY_APP_NAME", "value": "WorkBuddy" }
+        ]
+      }
+    },
+    {
+      "key": "GROK_BOT",
+      "name": "grok-bot",
+      "description": "Grok Bot execution context. Its SAND_AGENT marker must precede the shared CURSOR_AGENT compatibility marker; this is separate from Grok Build.",
+      "match": {
+        "type": "anyOf",
+        "conditions": [{ "type": "env_value", "name": "SAND_AGENT", "value": "1" }]
+      }
+    },
+    {
+      "key": "QODERWORK",
+      "name": "qoderwork",
+      "description": "QoderWork-family execution context, including the inspected QwenWork distribution. These markers do not establish a region or distinguish product branding.",
+      "match": {
+        "type": "anyOf",
+        "conditions": [
+          { "type": "env_set", "name": "QODERWORK_SOURCE_CHAT_ID" },
+          { "type": "env_value", "name": "QODERWORK_IS_CN", "value": "true" }
+        ]
+      }
+    },
+    {
+      "key": "MANUS",
+      "name": "manus",
+      "description": "Manus Linux desktop-worker context from a reported runtime marker. Other MANUS-prefixed configuration variables are insufficient.",
+      "match": {
+        "type": "anyOf",
+        "conditions": [
+          { "type": "env_value", "name": "MANUS_LONG_DESKTOP_WORKER", "value": "1" }
+        ]
+      }
+    },
+    {
       "key": "CURSOR",
       "name": "cursor",
       "match": {
@@ -87,10 +131,11 @@
     {
       "key": "GROK",
       "name": "grok",
-      "description": "Grok Build plugin hooks. Evaluated before Claude Code because Grok supports Claude Code plugins and may expose compatibility markers.",
+      "description": "Grok Build terminal or plugin context. GROK_AGENT must equal 1 because the same variable also has selector uses. Evaluated before Claude Code compatibility markers.",
       "match": {
         "type": "anyOf",
         "conditions": [
+          { "type": "env_value", "name": "GROK_AGENT", "value": "1" },
           { "type": "env_set", "name": "GROK_PLUGIN_ROOT" },
           { "type": "env_set", "name": "GROK_PLUGIN_DATA" }
         ]

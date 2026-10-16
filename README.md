@@ -57,6 +57,10 @@ This package can detect the following AI agents and development environments:
 - **Trae**
 - **VTCode**
 - **Zed terminal environment**
+- **WorkBuddy**
+- **Grok Bot** (separate from Grok Build)
+- **QoderWork-family environments**, including the inspected QwenWork distribution
+- **Manus Linux desktop-worker context**
 
 See the bundled [`agents.json`](detect_agent/agents.json) for the exact environment variables and conditions used to detect each one.
 
@@ -74,7 +78,20 @@ The same registry provides `GOOSE_TERMINAL` and `AGENT_CONTEXT_OUT`, which exten
 the existing Goose and Kiro rules without removing their previous conditions.
 Hermes additionally [advertises
 `HERMES_AGENT`](https://github.com/NousResearch/hermes-agent/blob/e5eb6b36fe78eb012cefd1f5f436cd458411b8b3/hermes_cli/main.py#L3268).
-VTCode requires the exact value `1`; the other added markers require a non-empty value.
+Among these registry-derived additions, VTCode requires the exact value `1`; the other
+markers require a non-empty value.
+
+WorkBuddy uses exact `WORKBUDDY_APPLICATION_NAME=WorkBuddy` or `WORKBUDDY_APP_NAME=WorkBuddy` markers;
+generic packaging or configuration variables are insufficient. Grok Bot uses
+`SAND_AGENT=1`, ahead of the Cursor compatibility markers it also sets. Grok Build
+remains a separate result and additionally accepts the exact terminal marker
+`GROK_AGENT=1`. QoderWork-family environments use a non-empty
+`QODERWORK_SOURCE_CHAT_ID` or exact `QODERWORK_IS_CN=true`; the result identifies
+the family, not a region or product branding. See the [marker evidence notes](docs/environment-marker-evidence.md)
+for inspected versions, artifact hashes, propagation paths and the Grok Build source.
+Manus uses the exact `MANUS_LONG_DESKTOP_WORKER=1` marker from a user-provided
+Linux desktop-worker runtime observation; other `MANUS_` configuration variables
+are not detection rules.
 
 New agent-specific markers precede inherited Cursor terminal context. The relative
 order and identifiers of existing rules are preserved, as are the `AI_AGENT` override

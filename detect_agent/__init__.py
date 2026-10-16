@@ -39,6 +39,10 @@ KILO_CODE: Literal["kilo-code"] = "kilo-code"
 TRAE: Literal["trae"] = "trae"
 VTCODE: Literal["vtcode"] = "vtcode"
 ZED: Literal["zed"] = "zed"
+WORKBUDDY: Literal["workbuddy"] = "workbuddy"
+GROK_BOT: Literal["grok-bot"] = "grok-bot"
+QODERWORK: Literal["qoderwork"] = "qoderwork"
+MANUS: Literal["manus"] = "manus"
 
 KnownAgentNames = Literal[
     "cursor",
@@ -67,6 +71,10 @@ KnownAgentNames = Literal[
     "trae",
     "vtcode",
     "zed",
+    "workbuddy",
+    "grok-bot",
+    "qoderwork",
+    "manus",
 ]
 
 
