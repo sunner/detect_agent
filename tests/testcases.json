@@ -854,9 +854,9 @@
     "expectedIsAgent": false
   },
   {
-    "name": "EXECUTION_ENV alone does not identify QwenWork",
+    "name": "QODERWORK_EXECUTION_ENV alone does not identify QwenWork",
     "env": {
-      "EXECUTION_ENV": "local"
+      "QODERWORK_EXECUTION_ENV": "local"
     },
     "expectedIsAgent": false
   },
@@ -880,7 +880,7 @@
       "QODERWORK_SOURCE_CHAT_ID": "synthetic-chat",
       "QODERWORK_IS_CN": "true",
       "QODER_SITE": "cn",
-      "EXECUTION_ENV": "local",
+      "QODERWORK_EXECUTION_ENV": "local",
       "QWENWORK_BASE_URL": "https://qwenwork.example.invalid",
       "QODERCN_SERVER_ENDPOINT": "https://gateway.example.invalid"
     },
@@ -892,7 +892,7 @@
       "QODERWORK_SOURCE_CHAT_ID": "synthetic-chat",
       "QODERWORK_IS_CN": "true",
       "QODER_SITE": "cn",
-      "EXECUTION_ENV": "local",
+      "QODERWORK_EXECUTION_ENV": "local",
       "QWENWORK_BASE_URL": "https://qwenwork.example.invalid",
       "QODERCN_SERVER_ENDPOINT": "https://gateway.example.invalid",
       "QODER_WORK_INTEGRATION_PRODUCT": "other-product"
@@ -905,7 +905,7 @@
       "QODERWORK_SOURCE_CHAT_ID": "synthetic-chat",
       "QODERWORK_IS_CN": "true",
       "QODER_SITE": "cn",
-      "EXECUTION_ENV": "local",
+      "QODERWORK_EXECUTION_ENV": "local",
       "QWENWORK_BASE_URL": "https://qwenwork.example.invalid",
       "QODERCN_SERVER_ENDPOINT": "https://gateway.example.invalid",
       "QODER_WORK_INTEGRATION_PRODUCT": ""
@@ -918,7 +918,7 @@
       "QODERWORK_SOURCE_CHAT_ID": "synthetic-chat",
       "QODERWORK_IS_CN": "true",
       "QODER_SITE": "cn",
-      "EXECUTION_ENV": "local",
+      "QODERWORK_EXECUTION_ENV": "local",
       "QWENWORK_BASE_URL": "https://qwenwork.example.invalid",
       "QODERCN_SERVER_ENDPOINT": "https://gateway.example.invalid",
       "QODER_WORK_INTEGRATION_PRODUCT": "qwenworkcn"
