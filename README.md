@@ -54,16 +54,16 @@ This package can detect the following AI agents and development environments:
 - **Crush** (Charm)
 - **Hermes Agent** (Nous Research)
 - **Kilo Code**
-- **Trae**
-- **VTCode**
-- **Zed terminal environment**
+- **TRAE**
+- **VT Code**
+- **Zed**
 - **WorkBuddy**
 - **Grok Bot** (separate from Grok Build)
 - **[QwenWork](https://qwenwork.cn)**
-- **Cue Linux desktop-worker context**
+- **Cue**
 - **Muse**
-- **ManusStudio addon-runtime context**
-- **Doubao Office**
+- **Manus**
+- **Doubao Work**
 
 See the bundled [`agents.json`](detect_agent/agents.json) for the exact environment variables and conditions used to detect each one.
 
@@ -97,19 +97,20 @@ inspected build sets `qwenworkcn`, but the rule does not restrict the value;
 shared use of this variable by other products has not been established. Session
 IDs, region/site flags, execution mode and service endpoints do not independently
 identify the product. See the [marker evidence notes](docs/environment-marker-evidence.md)
-for inspected versions, artifact hashes, propagation paths and the Grok Build source.
+for official product descriptions, inspected versions, artifact hashes, propagation
+paths and the Grok Build source.
 Cue uses the exact `MANUS_LONG_DESKTOP_WORKER=1` marker from a user-provided
 Linux desktop-worker runtime observation. Despite the variable prefix, this rule
 identifies Cue, not Manus. Muse uses exact `JARVIS_IS_ASSIGNED=1` or a non-empty
 `JARVIS_TOOL_CALL_ID` from user-provided active-agent and tool-call observations.
 Other configuration, instance, session, tier or location variables do not
 independently trigger these rules.
-The ManusStudio rule checks a non-empty `MANUS_ADDON_RUNTIME_SPEC_PATH`
+The Manus rule checks a non-empty `MANUS_ADDON_RUNTIME_SPEC_PATH`
 or `MANUS_ADDON_RUNTIME_SPECS_REVISION`. These descriptor names were reported in
 an ordinary shell; their values were not supplied. The Grok Bot cloud-shell
 combination also comes from a user observation. Shared infrastructure markers
 do not establish exclusive product ownership or the immediate caller.
-Doubao Office checks whether `DOUBAO_OFFICE_AGENT_NAME` has a non-empty value,
+Doubao Work checks whether `DOUBAO_OFFICE_AGENT_NAME` has a non-empty value,
 using the existing `env_set` semantics. Its value is not compared to a fixed
 agent name; missing and empty values do not match. This variable comes from a
 user-provided runtime observation. Other message, application, proxy, credential

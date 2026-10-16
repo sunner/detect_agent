@@ -44,8 +44,8 @@ GROK_BOT: Literal["grok-bot"] = "grok-bot"
 QWENWORK: Literal["qwenwork"] = "qwenwork"
 CUE: Literal["cue"] = "cue"
 MUSE: Literal["muse"] = "muse"
-MANUS_STUDIO: Literal["manus-studio"] = "manus-studio"
-DOUBAO_OFFICE: Literal["doubao-office"] = "doubao-office"
+MANUS: Literal["manus"] = "manus"
+DOUBAO_WORK: Literal["doubao-work"] = "doubao-work"
 
 KnownAgentNames = Literal[
     "cursor",
@@ -79,8 +79,8 @@ KnownAgentNames = Literal[
     "qwenwork",
     "cue",
     "muse",
-    "manus-studio",
-    "doubao-office",
+    "manus",
+    "doubao-work",
 ]
 
 
