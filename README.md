@@ -63,6 +63,7 @@ This package can detect the following AI agents and development environments:
 - **Cue Linux desktop-worker context**
 - **Muse**
 - **ManusStudio addon-runtime context**
+- **Doubao Office**
 
 See the bundled [`agents.json`](detect_agent/agents.json) for the exact environment variables and conditions used to detect each one.
 
@@ -105,6 +106,9 @@ or `MANUS_ADDON_RUNTIME_SPECS_REVISION`. These descriptor names were reported in
 an ordinary shell; their values were not supplied. The Grok Bot cloud-shell
 combination also comes from a user observation. Shared infrastructure markers
 do not establish exclusive product ownership or the immediate caller.
+Doubao Office uses only the exact `DOUBAO_OFFICE_AGENT_NAME=doubao_moa` marker
+from a user-provided runtime observation. Other message, application, proxy,
+credential and deployment fields do not independently identify it.
 
 New agent-specific markers precede inherited Cursor terminal context. The relative
 order and identifiers of existing rules are preserved, as are the `AI_AGENT` override

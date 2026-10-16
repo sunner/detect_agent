@@ -130,6 +130,17 @@
       }
     },
     {
+      "key": "DOUBAO_OFFICE",
+      "name": "doubao-office",
+      "description": "Doubao Office context from a user-reported exact runtime agent-name marker. Message, application, proxy, credential and deployment metadata are insufficient.",
+      "match": {
+        "type": "anyOf",
+        "conditions": [
+          { "type": "env_value", "name": "DOUBAO_OFFICE_AGENT_NAME", "value": "doubao_moa" }
+        ]
+      }
+    },
+    {
       "key": "CURSOR",
       "name": "cursor",
       "match": {

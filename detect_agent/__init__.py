@@ -45,6 +45,7 @@ QWENWORK: Literal["qwenwork"] = "qwenwork"
 CUE: Literal["cue"] = "cue"
 MUSE: Literal["muse"] = "muse"
 MANUS_STUDIO: Literal["manus-studio"] = "manus-studio"
+DOUBAO_OFFICE: Literal["doubao-office"] = "doubao-office"
 
 KnownAgentNames = Literal[
     "cursor",
@@ -79,6 +80,7 @@ KnownAgentNames = Literal[
     "cue",
     "muse",
     "manus-studio",
+    "doubao-office",
 ]
 
 
