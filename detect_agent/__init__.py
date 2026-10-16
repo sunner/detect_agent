@@ -41,7 +41,7 @@ VTCODE: Literal["vtcode"] = "vtcode"
 ZED: Literal["zed"] = "zed"
 WORKBUDDY: Literal["workbuddy"] = "workbuddy"
 GROK_BOT: Literal["grok-bot"] = "grok-bot"
-QODERWORK: Literal["qoderwork"] = "qoderwork"
+QWENWORK: Literal["qwenwork"] = "qwenwork"
 CUE: Literal["cue"] = "cue"
 MUSE: Literal["muse"] = "muse"
 MANUS_STUDIO: Literal["manus-studio"] = "manus-studio"
@@ -75,7 +75,7 @@ KnownAgentNames = Literal[
     "zed",
     "workbuddy",
     "grok-bot",
-    "qoderwork",
+    "qwenwork",
     "cue",
     "muse",
     "manus-studio",

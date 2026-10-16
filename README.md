@@ -59,7 +59,7 @@ This package can detect the following AI agents and development environments:
 - **Zed terminal environment**
 - **WorkBuddy**
 - **Grok Bot** (separate from Grok Build)
-- **QoderWork-family environments**, including the inspected QwenWork distribution
+- **[QwenWork](https://qwenwork.cn)**
 - **Cue Linux desktop-worker context**
 - **Muse**
 - **ManusStudio addon-runtime context**
@@ -89,9 +89,10 @@ generic packaging or configuration variables are insufficient. Grok Bot uses
 exact `SAND_MANIFEST_V2=1` and `SAND_SUPERVISOR_ENABLED=1`, ahead of the Cursor
 compatibility rules. Grok Build
 remains a separate result and additionally accepts the exact terminal marker
-`GROK_AGENT=1`. QoderWork-family environments use a non-empty
-`QODERWORK_SOURCE_CHAT_ID` or exact `QODERWORK_IS_CN=true`; the result identifies
-the family, not a region or product branding. See the [marker evidence notes](docs/environment-marker-evidence.md)
+`GROK_AGENT=1`. QwenWork uses only the exact product marker
+`QODER_WORK_INTEGRATION_PRODUCT=qwenworkcn`, returning `qwenwork`. Session IDs,
+region/site flags, execution mode and service endpoints do not independently
+identify the product. See the [marker evidence notes](docs/environment-marker-evidence.md)
 for inspected versions, artifact hashes, propagation paths and the Grok Build source.
 Cue uses the exact `MANUS_LONG_DESKTOP_WORKER=1` marker from a user-provided
 Linux desktop-worker runtime observation. Despite the variable prefix, this rule
