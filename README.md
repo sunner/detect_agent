@@ -90,9 +90,12 @@ generic packaging or configuration variables are insufficient. Grok Bot uses
 exact `SAND_MANIFEST_V2=1` and `SAND_SUPERVISOR_ENABLED=1`, ahead of the Cursor
 compatibility rules. Grok Build
 remains a separate result and additionally accepts the exact terminal marker
-`GROK_AGENT=1`. QwenWork uses only the exact product marker
-`QODER_WORK_INTEGRATION_PRODUCT=qwenworkcn`, returning `qwenwork`. Session IDs,
-region/site flags, execution mode and service endpoints do not independently
+`GROK_AGENT=1`. QwenWork checks for a non-empty
+`QODER_WORK_INTEGRATION_PRODUCT`, returning `qwenwork`. The existing `env_set`
+semantics accept any non-empty value and reject missing or empty values. The
+inspected build sets `qwenworkcn`, but the rule does not restrict the value;
+shared use of this variable by other products has not been established. Session
+IDs, region/site flags, execution mode and service endpoints do not independently
 identify the product. See the [marker evidence notes](docs/environment-marker-evidence.md)
 for inspected versions, artifact hashes, propagation paths and the Grok Build source.
 Cue uses the exact `MANUS_LONG_DESKTOP_WORKER=1` marker from a user-provided
