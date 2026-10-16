@@ -67,10 +67,20 @@
     {
       "key": "GROK_BOT",
       "name": "grok-bot",
-      "description": "Grok Bot execution context. Its SAND_AGENT marker must precede the shared CURSOR_AGENT compatibility marker; this is separate from Grok Build.",
+      "description": "Grok Bot local or reported cloud-shell context. The cloud branch requires CURSOR_AGENT plus both exact Sand flags; shared infrastructure markers do not prove an exclusive or immediate caller. This rule precedes Cursor compatibility markers and is separate from Grok Build.",
       "match": {
         "type": "anyOf",
-        "conditions": [{ "type": "env_value", "name": "SAND_AGENT", "value": "1" }]
+        "conditions": [
+          { "type": "env_value", "name": "SAND_AGENT", "value": "1" },
+          {
+            "type": "allOf",
+            "conditions": [
+              { "type": "env_set", "name": "CURSOR_AGENT" },
+              { "type": "env_value", "name": "SAND_MANIFEST_V2", "value": "1" },
+              { "type": "env_value", "name": "SAND_SUPERVISOR_ENABLED", "value": "1" }
+            ]
+          }
+        ]
       }
     },
     {
@@ -86,13 +96,37 @@
       }
     },
     {
-      "key": "MANUS",
-      "name": "manus",
-      "description": "Manus Linux desktop-worker context from a reported runtime marker. Other MANUS-prefixed configuration variables are insufficient.",
+      "key": "CUE",
+      "name": "cue",
+      "description": "Cue Linux desktop-worker context from a reported runtime marker. Other MANUS-prefixed configuration variables are insufficient.",
       "match": {
         "type": "anyOf",
         "conditions": [
           { "type": "env_value", "name": "MANUS_LONG_DESKTOP_WORKER", "value": "1" }
+        ]
+      }
+    },
+    {
+      "key": "MUSE",
+      "name": "muse",
+      "description": "Muse execution context from reported active-agent or tool-call markers. Other instance, session, tier or location metadata is insufficient.",
+      "match": {
+        "type": "anyOf",
+        "conditions": [
+          { "type": "env_value", "name": "JARVIS_IS_ASSIGNED", "value": "1" },
+          { "type": "env_set", "name": "JARVIS_TOOL_CALL_ID" }
+        ]
+      }
+    },
+    {
+      "key": "MANUS_STUDIO",
+      "name": "manus-studio",
+      "description": "ManusStudio addon-runtime descriptor context from user-reported ordinary-shell observations. Descriptor values were not supplied; matching requires a non-empty value.",
+      "match": {
+        "type": "anyOf",
+        "conditions": [
+          { "type": "env_set", "name": "MANUS_ADDON_RUNTIME_SPEC_PATH" },
+          { "type": "env_set", "name": "MANUS_ADDON_RUNTIME_SPECS_REVISION" }
         ]
       }
     },

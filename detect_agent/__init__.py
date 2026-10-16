@@ -42,7 +42,9 @@ ZED: Literal["zed"] = "zed"
 WORKBUDDY: Literal["workbuddy"] = "workbuddy"
 GROK_BOT: Literal["grok-bot"] = "grok-bot"
 QODERWORK: Literal["qoderwork"] = "qoderwork"
-MANUS: Literal["manus"] = "manus"
+CUE: Literal["cue"] = "cue"
+MUSE: Literal["muse"] = "muse"
+MANUS_STUDIO: Literal["manus-studio"] = "manus-studio"
 
 KnownAgentNames = Literal[
     "cursor",
@@ -74,7 +76,9 @@ KnownAgentNames = Literal[
     "workbuddy",
     "grok-bot",
     "qoderwork",
-    "manus",
+    "cue",
+    "muse",
+    "manus-studio",
 ]
 
 

@@ -885,51 +885,51 @@
     "expectedIsAgent": false
   },
   {
-    "name": "detects Manus Linux desktop worker from exact marker",
+    "name": "detects Cue Linux desktop worker from exact marker",
     "env": {
       "MANUS_LONG_DESKTOP_WORKER": "1"
     },
     "expectedIsAgent": true,
-    "expectedAgentKey": "MANUS"
+    "expectedAgentKey": "CUE"
   },
   {
-    "name": "MANUS_LONG_DESKTOP_WORKER='' does not identify Manus",
+    "name": "MANUS_LONG_DESKTOP_WORKER='' does not identify Cue",
     "env": {
       "MANUS_LONG_DESKTOP_WORKER": ""
     },
     "expectedIsAgent": false
   },
   {
-    "name": "MANUS_LONG_DESKTOP_WORKER='false' does not identify Manus",
+    "name": "MANUS_LONG_DESKTOP_WORKER='false' does not identify Cue",
     "env": {
       "MANUS_LONG_DESKTOP_WORKER": "false"
     },
     "expectedIsAgent": false
   },
   {
-    "name": "MANUS_LONG_DESKTOP_WORKER='0' does not identify Manus",
+    "name": "MANUS_LONG_DESKTOP_WORKER='0' does not identify Cue",
     "env": {
       "MANUS_LONG_DESKTOP_WORKER": "0"
     },
     "expectedIsAgent": false
   },
   {
-    "name": "MANUS_LONG_DESKTOP_WORKER='true' does not identify Manus",
+    "name": "MANUS_LONG_DESKTOP_WORKER='true' does not identify Cue",
     "env": {
       "MANUS_LONG_DESKTOP_WORKER": "true"
     },
     "expectedIsAgent": false
   },
   {
-    "name": "Manus-prefixed path variables alone do not identify Manus",
+    "name": "Other MANUS-prefixed path variables alone do not identify Cue",
     "env": {
-      "MANUS_CONFIG_DIR": "/tmp/synthetic-manus-config",
-      "MANUS_HOME": "/tmp/synthetic-manus-home"
+      "MANUS_CONFIG_DIR": "/tmp/synthetic-config",
+      "MANUS_HOME": "/tmp/synthetic-home"
     },
     "expectedIsAgent": false
   },
   {
-    "name": "Manus desktop worker precedes inherited Cursor and Claude context",
+    "name": "Cue desktop worker precedes inherited Cursor and Claude context",
     "env": {
       "MANUS_LONG_DESKTOP_WORKER": "1",
       "CURSOR_AGENT": "1",
@@ -937,13 +937,460 @@
       "CLAUDECODE": "1"
     },
     "expectedIsAgent": true,
-    "expectedAgentKey": "MANUS"
+    "expectedAgentKey": "CUE"
   },
   {
-    "name": "AI_AGENT still overrides the Manus desktop worker marker",
+    "name": "AI_AGENT still overrides the Cue desktop worker marker",
     "env": {
       "AI_AGENT": "custom-priority",
       "MANUS_LONG_DESKTOP_WORKER": "1"
+    },
+    "expectedIsAgent": true,
+    "expectedName": "custom-priority"
+  },
+
+  {
+    "name": "Cue desktop worker marker returns cue rather than manus",
+    "env": {
+      "MANUS_LONG_DESKTOP_WORKER": "1"
+    },
+    "expectedIsAgent": true,
+    "expectedName": "cue"
+  },
+  {
+    "name": "detects Muse active-agent context from exact marker",
+    "env": {
+      "JARVIS_IS_ASSIGNED": "1"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "MUSE"
+  },
+  {
+    "name": "detects Muse tool-call context from a synthetic identifier",
+    "env": {
+      "JARVIS_TOOL_CALL_ID": "synthetic-tool-call"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "MUSE"
+  },
+  {
+    "name": "JARVIS_IS_ASSIGNED='' does not identify Muse",
+    "env": {
+      "JARVIS_IS_ASSIGNED": ""
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "JARVIS_IS_ASSIGNED='0' does not identify Muse",
+    "env": {
+      "JARVIS_IS_ASSIGNED": "0"
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "JARVIS_IS_ASSIGNED='false' does not identify Muse",
+    "env": {
+      "JARVIS_IS_ASSIGNED": "false"
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "JARVIS_IS_ASSIGNED='true' does not identify Muse",
+    "env": {
+      "JARVIS_IS_ASSIGNED": "true"
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "JARVIS_IS_ASSIGNED='1 ' does not identify Muse",
+    "env": {
+      "JARVIS_IS_ASSIGNED": "1 "
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "empty Muse tool-call identifier does not identify Muse",
+    "env": {
+      "JARVIS_TOOL_CALL_ID": ""
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "Muse tool-call marker independently identifies its context",
+    "env": {
+      "JARVIS_IS_ASSIGNED": "0",
+      "JARVIS_TOOL_CALL_ID": "synthetic-tool-call"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "MUSE"
+  },
+  {
+    "name": "instance session and location metadata alone does not identify Muse",
+    "env": {
+      "HATCHLING_ID": "synthetic-instance",
+      "SESSION_ID": "synthetic-session",
+      "TIER": "synthetic-tier",
+      "TIMEZONE": "UTC",
+      "REGION": "synthetic-region"
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "JARVIS_IS_ASSIGNED precedes inherited Cursor and Claude context",
+    "env": {
+      "JARVIS_IS_ASSIGNED": "1",
+      "CURSOR_AGENT": "1",
+      "CURSOR_TRACE_ID": "editor-trace",
+      "CLAUDECODE": "1"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "MUSE"
+  },
+  {
+    "name": "JARVIS_TOOL_CALL_ID precedes inherited Cursor and Claude context",
+    "env": {
+      "JARVIS_TOOL_CALL_ID": "synthetic-tool-call",
+      "CURSOR_AGENT": "1",
+      "CURSOR_TRACE_ID": "editor-trace",
+      "CLAUDECODE": "1"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "MUSE"
+  },
+  {
+    "name": "AI_AGENT still overrides Muse runtime markers",
+    "env": {
+      "AI_AGENT": "custom-priority",
+      "JARVIS_IS_ASSIGNED": "1",
+      "JARVIS_TOOL_CALL_ID": "synthetic-tool-call"
+    },
+    "expectedIsAgent": true,
+    "expectedName": "custom-priority"
+  },
+
+  {
+    "name": "ManusStudio context from non-empty MANUS_ADDON_RUNTIME_SPEC_PATH",
+    "env": {
+      "MANUS_ADDON_RUNTIME_SPEC_PATH": "/tmp/synthetic-addon-spec.json"
+    },
+    "expectedIsAgent": true,
+    "expectedName": "manus-studio"
+  },
+  {
+    "name": "empty MANUS_ADDON_RUNTIME_SPEC_PATH does not identify ManusStudio",
+    "env": {
+      "MANUS_ADDON_RUNTIME_SPEC_PATH": ""
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "MANUS_ADDON_RUNTIME_SPEC_PATH precedes inherited Cursor context",
+    "env": {
+      "MANUS_ADDON_RUNTIME_SPEC_PATH": "/tmp/synthetic-addon-spec.json",
+      "CURSOR_AGENT": "1",
+      "CURSOR_TRACE_ID": "editor-trace"
+    },
+    "expectedIsAgent": true,
+    "expectedName": "manus-studio"
+  },
+  {
+    "name": "ManusStudio context from non-empty MANUS_ADDON_RUNTIME_SPECS_REVISION",
+    "env": {
+      "MANUS_ADDON_RUNTIME_SPECS_REVISION": "synthetic-revision"
+    },
+    "expectedIsAgent": true,
+    "expectedName": "manus-studio"
+  },
+  {
+    "name": "empty MANUS_ADDON_RUNTIME_SPECS_REVISION does not identify ManusStudio",
+    "env": {
+      "MANUS_ADDON_RUNTIME_SPECS_REVISION": ""
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "MANUS_ADDON_RUNTIME_SPECS_REVISION precedes inherited Cursor context",
+    "env": {
+      "MANUS_ADDON_RUNTIME_SPECS_REVISION": "synthetic-revision",
+      "CURSOR_AGENT": "1",
+      "CURSOR_TRACE_ID": "editor-trace"
+    },
+    "expectedIsAgent": true,
+    "expectedName": "manus-studio"
+  },
+  {
+    "name": "MANUS_ADDON_PREVIEW_PUBLIC_ORIGIN alone does not identify ManusStudio",
+    "env": {
+      "MANUS_ADDON_PREVIEW_PUBLIC_ORIGIN": "https://preview.example.invalid"
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "MANUS_ADDON_REGISTRY_ENABLED alone does not identify ManusStudio",
+    "env": {
+      "MANUS_ADDON_REGISTRY_ENABLED": "1"
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "MANUS_ADDON_RUNTIME_PUBLIC_ORIGIN alone does not identify ManusStudio",
+    "env": {
+      "MANUS_ADDON_RUNTIME_PUBLIC_ORIGIN": "https://runtime.example.invalid"
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "MANUS_ADDON_SERVER_BRANCH alone does not identify ManusStudio",
+    "env": {
+      "MANUS_ADDON_SERVER_BRANCH": "synthetic-branch"
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "MANUS_GROUP_ENABLED alone does not identify ManusStudio",
+    "env": {
+      "MANUS_GROUP_ENABLED": "1"
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "other Manus addon and group fields together do not identify ManusStudio",
+    "env": {
+      "MANUS_ADDON_PREVIEW_PUBLIC_ORIGIN": "https://preview.example.invalid",
+      "MANUS_ADDON_REGISTRY_ENABLED": "1",
+      "MANUS_ADDON_RUNTIME_PUBLIC_ORIGIN": "https://runtime.example.invalid",
+      "MANUS_ADDON_SERVER_BRANCH": "synthetic-branch",
+      "MANUS_GROUP_ENABLED": "1"
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "AI_AGENT overrides ManusStudio descriptor context",
+    "env": {
+      "AI_AGENT": "custom-priority",
+      "MANUS_ADDON_RUNTIME_SPECS_REVISION": "synthetic-revision"
+    },
+    "expectedIsAgent": true,
+    "expectedName": "custom-priority"
+  },
+
+  {
+    "name": "detects reported Grok Bot cloud shell without SAND_AGENT",
+    "env": {
+      "CURSOR_AGENT": "1",
+      "SAND_MANIFEST_V2": "1",
+      "SAND_SUPERVISOR_ENABLED": "1"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "GROK_BOT"
+  },
+  {
+    "name": "Grok Bot local and cloud markers can coexist",
+    "env": {
+      "CURSOR_AGENT": "1",
+      "SAND_MANIFEST_V2": "1",
+      "SAND_SUPERVISOR_ENABLED": "1",
+      "SAND_AGENT": "1"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "GROK_BOT"
+  },
+  {
+    "name": "Grok Bot local marker does not require valid cloud flags",
+    "env": {
+      "SAND_AGENT": "1",
+      "SAND_MANIFEST_V2": "0",
+      "SAND_SUPERVISOR_ENABLED": "0"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "GROK_BOT"
+  },
+  {
+    "name": "Grok Bot cloud combination does not require the local marker value",
+    "env": {
+      "CURSOR_AGENT": "1",
+      "SAND_MANIFEST_V2": "1",
+      "SAND_SUPERVISOR_ENABLED": "1",
+      "SAND_AGENT": "0"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "GROK_BOT"
+  },
+  {
+    "name": "Grok Bot cloud branch requires CURSOR_AGENT",
+    "env": {
+      "SAND_MANIFEST_V2": "1",
+      "SAND_SUPERVISOR_ENABLED": "1"
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "empty CURSOR_AGENT does not satisfy the Grok Bot cloud branch",
+    "env": {
+      "CURSOR_AGENT": "",
+      "SAND_MANIFEST_V2": "1",
+      "SAND_SUPERVISOR_ENABLED": "1"
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "Grok Bot cloud branch requires SAND_MANIFEST_V2",
+    "env": {
+      "CURSOR_AGENT": "1",
+      "SAND_SUPERVISOR_ENABLED": "1"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "CURSOR_CLI"
+  },
+  {
+    "name": "empty SAND_MANIFEST_V2 does not satisfy the Grok Bot cloud branch",
+    "env": {
+      "CURSOR_AGENT": "1",
+      "SAND_MANIFEST_V2": "",
+      "SAND_SUPERVISOR_ENABLED": "1"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "CURSOR_CLI"
+  },
+  {
+    "name": "Grok Bot cloud branch requires SAND_SUPERVISOR_ENABLED",
+    "env": {
+      "CURSOR_AGENT": "1",
+      "SAND_MANIFEST_V2": "1"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "CURSOR_CLI"
+  },
+  {
+    "name": "empty SAND_SUPERVISOR_ENABLED does not satisfy the Grok Bot cloud branch",
+    "env": {
+      "CURSOR_AGENT": "1",
+      "SAND_MANIFEST_V2": "1",
+      "SAND_SUPERVISOR_ENABLED": ""
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "CURSOR_CLI"
+  },
+  {
+    "name": "SAND_MANIFEST_V2='0' falls back to Cursor CLI instead of Grok Bot",
+    "env": {
+      "CURSOR_AGENT": "1",
+      "SAND_MANIFEST_V2": "0",
+      "SAND_SUPERVISOR_ENABLED": "1"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "CURSOR_CLI"
+  },
+  {
+    "name": "SAND_MANIFEST_V2='true' falls back to Cursor CLI instead of Grok Bot",
+    "env": {
+      "CURSOR_AGENT": "1",
+      "SAND_MANIFEST_V2": "true",
+      "SAND_SUPERVISOR_ENABLED": "1"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "CURSOR_CLI"
+  },
+  {
+    "name": "SAND_MANIFEST_V2='false' falls back to Cursor CLI instead of Grok Bot",
+    "env": {
+      "CURSOR_AGENT": "1",
+      "SAND_MANIFEST_V2": "false",
+      "SAND_SUPERVISOR_ENABLED": "1"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "CURSOR_CLI"
+  },
+  {
+    "name": "SAND_MANIFEST_V2=' 1 ' falls back to Cursor CLI instead of Grok Bot",
+    "env": {
+      "CURSOR_AGENT": "1",
+      "SAND_MANIFEST_V2": " 1 ",
+      "SAND_SUPERVISOR_ENABLED": "1"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "CURSOR_CLI"
+  },
+  {
+    "name": "SAND_MANIFEST_V2 alone does not identify Grok Bot",
+    "env": {
+      "SAND_MANIFEST_V2": "1"
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "SAND_SUPERVISOR_ENABLED='0' falls back to Cursor CLI instead of Grok Bot",
+    "env": {
+      "CURSOR_AGENT": "1",
+      "SAND_MANIFEST_V2": "1",
+      "SAND_SUPERVISOR_ENABLED": "0"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "CURSOR_CLI"
+  },
+  {
+    "name": "SAND_SUPERVISOR_ENABLED='true' falls back to Cursor CLI instead of Grok Bot",
+    "env": {
+      "CURSOR_AGENT": "1",
+      "SAND_MANIFEST_V2": "1",
+      "SAND_SUPERVISOR_ENABLED": "true"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "CURSOR_CLI"
+  },
+  {
+    "name": "SAND_SUPERVISOR_ENABLED='false' falls back to Cursor CLI instead of Grok Bot",
+    "env": {
+      "CURSOR_AGENT": "1",
+      "SAND_MANIFEST_V2": "1",
+      "SAND_SUPERVISOR_ENABLED": "false"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "CURSOR_CLI"
+  },
+  {
+    "name": "SAND_SUPERVISOR_ENABLED=' 1 ' falls back to Cursor CLI instead of Grok Bot",
+    "env": {
+      "CURSOR_AGENT": "1",
+      "SAND_MANIFEST_V2": "1",
+      "SAND_SUPERVISOR_ENABLED": " 1 "
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "CURSOR_CLI"
+  },
+  {
+    "name": "SAND_SUPERVISOR_ENABLED alone does not identify Grok Bot",
+    "env": {
+      "SAND_SUPERVISOR_ENABLED": "1"
+    },
+    "expectedIsAgent": false
+  },
+  {
+    "name": "Cursor marker alone does not identify the Grok Bot cloud shell",
+    "env": {
+      "CURSOR_AGENT": "1"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "CURSOR_CLI"
+  },
+  {
+    "name": "Grok Bot cloud shell precedes inherited Cursor editor context",
+    "env": {
+      "CURSOR_AGENT": "1",
+      "SAND_MANIFEST_V2": "1",
+      "SAND_SUPERVISOR_ENABLED": "1",
+      "CURSOR_TRACE_ID": "editor-trace"
+    },
+    "expectedIsAgent": true,
+    "expectedAgentKey": "GROK_BOT"
+  },
+  {
+    "name": "AI_AGENT overrides Grok Bot cloud shell context",
+    "env": {
+      "CURSOR_AGENT": "1",
+      "SAND_MANIFEST_V2": "1",
+      "SAND_SUPERVISOR_ENABLED": "1",
+      "AI_AGENT": "custom-priority"
     },
     "expectedIsAgent": true,
     "expectedName": "custom-priority"

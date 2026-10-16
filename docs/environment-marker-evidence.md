@@ -43,12 +43,22 @@ Inspected Grok Bot 0.71.2, bundle ID `com.anysphere.sand`.
   environment to the Bash initialization at line 602 (`Jae`) and the Zsh
   initialization at line 608 (`Wae`), which merge it into the child environment.
 
-The rule requires exact `SAND_AGENT=1` and precedes Cursor rules. `CURSOR_AGENT`
-is shared compatibility context and is not an alternative Grok Bot marker.
-This identifies the inspected local shell path; it does not assert complete
-cloud or PowerShell coverage. The [public architecture documentation](https://cursor.com/docs/grok-bot/teams#architecture)
+The local branch requires exact `SAND_AGENT=1` and precedes Cursor rules.
+`CURSOR_AGENT` alone is shared compatibility context and is not an alternative
+Grok Bot marker. The static evidence covers the described local shell path,
+not complete cloud or PowerShell behavior. The [public architecture documentation](https://cursor.com/docs/grok-bot/teams#architecture)
 distinguishes the cloud service from the local execution daemon. Grok Bot has a
 separate result from Grok Build.
+
+A separate user-provided ordinary-shell observation on **2026-10-16** reported
+a Grok Bot cloud context with `CURSOR_AGENT` and the exact flags
+`SAND_MANIFEST_V2=1` and `SAND_SUPERVISOR_ENABLED=1`, without `SAND_AGENT`.
+The cloud branch requires all three conditions together. The infrastructure
+flags alone and `CURSOR_AGENT` alone do not match this branch. This observation
+was not reproduced by launching the cloud environment for this contribution.
+These shared markers do not establish exclusive brand ownership or resolve
+nested agents' immediate identity. No tenant, authentication, store, boot or VNC
+identifier is used by the rule or included in the fixtures.
 
 ## QoderWork family
 
@@ -75,14 +85,39 @@ chat ID. The [QwenWork introduction](https://qwenwork.cn/docs/product-introducti
 identifies the inspected brand; the [QoderWork hooks documentation](https://docs.qoder.com/qoderwork/hooks)
 does not establish these markers for hook invocations.
 
-## Manus
+## Cue
 
 A user-provided Linux desktop-worker runtime observation on **2026-10-16**
-reported `MANUS_LONG_DESKTOP_WORKER=1`. The rule accepts only that exact value.
-This observation was not reproduced by launching Manus during this contribution;
+identified Cue with `MANUS_LONG_DESKTOP_WORKER=1`. The variable prefix does not
+establish a Manus product identity: the rule returns `cue` and accepts only
+that exact value.
+This observation was not reproduced by launching Cue during this contribution;
 no inspected application version or artifact hash is claimed. Other `MANUS_`
 path, endpoint or identifier variables are not independent detection conditions.
 No real desktop identifier, path or endpoint is included in the evidence or tests.
+
+## Muse
+
+User-provided runtime observations on **2026-10-16** identified
+`JARVIS_IS_ASSIGNED=1` in Muse's active-agent context and a non-empty
+`JARVIS_TOOL_CALL_ID` during a tool call. Either condition identifies the
+reported Muse context. The active-agent value must be exact `1`; the tool-call
+ID is checked only for non-emptiness and is never reported by this detector.
+Other instance, session, tier, timezone or region fields do not independently
+match. These observations were not reproduced by launching Muse for this
+contribution, and no inspected application version or artifact hash is claimed.
+Fixtures use synthetic tool-call identifiers, never real runtime IDs.
+
+## ManusStudio
+
+A user reported the marker names `MANUS_ADDON_RUNTIME_SPEC_PATH` and
+`MANUS_ADDON_RUNTIME_SPECS_REVISION` in an ordinary shell on **2026-10-16**,
+without providing their values. The conditions treat them as addon-runtime
+descriptors and conservatively require non-empty values, returning `manus-studio`.
+This is user-reported shell evidence, not a locally reproduced shell probe or
+validation of ManusStudio 2.0.7. The separate local static review did not confirm
+these marker names or their propagation. No `ENABLED` value is guessed.
+Tests use synthetic descriptor values; no real spec path or revision is recorded.
 
 ## Grok Build terminal marker
 

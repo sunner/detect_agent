@@ -60,7 +60,9 @@ This package can detect the following AI agents and development environments:
 - **WorkBuddy**
 - **Grok Bot** (separate from Grok Build)
 - **QoderWork-family environments**, including the inspected QwenWork distribution
-- **Manus Linux desktop-worker context**
+- **Cue Linux desktop-worker context**
+- **Muse**
+- **ManusStudio addon-runtime context**
 
 See the bundled [`agents.json`](detect_agent/agents.json) for the exact environment variables and conditions used to detect each one.
 
@@ -83,15 +85,25 @@ markers require a non-empty value.
 
 WorkBuddy uses exact `WORKBUDDY_APPLICATION_NAME=WorkBuddy` or `WORKBUDDY_APP_NAME=WorkBuddy` markers;
 generic packaging or configuration variables are insufficient. Grok Bot uses
-`SAND_AGENT=1`, ahead of the Cursor compatibility markers it also sets. Grok Build
+`SAND_AGENT=1`, or a cloud-shell combination of non-empty `CURSOR_AGENT` with
+exact `SAND_MANIFEST_V2=1` and `SAND_SUPERVISOR_ENABLED=1`, ahead of the Cursor
+compatibility rules. Grok Build
 remains a separate result and additionally accepts the exact terminal marker
 `GROK_AGENT=1`. QoderWork-family environments use a non-empty
 `QODERWORK_SOURCE_CHAT_ID` or exact `QODERWORK_IS_CN=true`; the result identifies
 the family, not a region or product branding. See the [marker evidence notes](docs/environment-marker-evidence.md)
 for inspected versions, artifact hashes, propagation paths and the Grok Build source.
-Manus uses the exact `MANUS_LONG_DESKTOP_WORKER=1` marker from a user-provided
-Linux desktop-worker runtime observation; other `MANUS_` configuration variables
-are not detection rules.
+Cue uses the exact `MANUS_LONG_DESKTOP_WORKER=1` marker from a user-provided
+Linux desktop-worker runtime observation. Despite the variable prefix, this rule
+identifies Cue, not Manus. Muse uses exact `JARVIS_IS_ASSIGNED=1` or a non-empty
+`JARVIS_TOOL_CALL_ID` from user-provided active-agent and tool-call observations.
+Other configuration, instance, session, tier or location variables do not
+independently trigger these rules.
+The ManusStudio rule checks a non-empty `MANUS_ADDON_RUNTIME_SPEC_PATH`
+or `MANUS_ADDON_RUNTIME_SPECS_REVISION`. These descriptor names were reported in
+an ordinary shell; their values were not supplied. The Grok Bot cloud-shell
+combination also comes from a user observation. Shared infrastructure markers
+do not establish exclusive product ownership or the immediate caller.
 
 New agent-specific markers precede inherited Cursor terminal context. The relative
 order and identifiers of existing rules are preserved, as are the `AI_AGENT` override
