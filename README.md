@@ -45,7 +45,7 @@ This package can detect the following AI agents and development environments:
 - **OpenCode**
 - **OpenClaw**
 - **Goose** (Block)
-- **Junie** (JetBrains)
+- **Junie** (JetBrains; non-empty `JUNIE_SHIM_PATH` only; `JUNIE_DATA` is ignored)
 - **Kiro** (AWS)
 - **Pi**
 - **GitHub Copilot**

@@ -258,13 +258,7 @@
     {
       "key": "JUNIE",
       "name": "junie",
-      "match": {
-        "type": "anyOf",
-        "conditions": [
-          { "type": "env_set", "name": "JUNIE_DATA" },
-          { "type": "env_set", "name": "JUNIE_SHIM_PATH" }
-        ]
-      }
+      "match": { "type": "env_set", "name": "JUNIE_SHIM_PATH" }
     },
     {
       "key": "PI",
